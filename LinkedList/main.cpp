@@ -18,7 +18,7 @@ public:
     Node<T> searchItem(T data);
     void insertItem(int index, T data);
     void deleteItem(int index);
-    void transverse(std::function<void(Node<T>)> lambda);
+    void traverse(std::function<void(Node<T>)> lambda);
     void printAll();
 };
 template<typename T>
@@ -81,7 +81,7 @@ void LinkedList<T>::deleteItem(int index) {
 
 }
 template<typename T>
-void LinkedList<T>::transverse(std::function<void(Node<T>)> lambda) {
+void LinkedList<T>::traverse(std::function<void(Node<T>)> lambda) {
     Node<T>* current = header;
     while(current != nullptr) {
         lambda(*current);
@@ -93,7 +93,7 @@ void LinkedList<T>::printAll() {
     auto lambda= [](Node<T> node){
         std::cout << node.data << '\n';
     };
-    transverse(lambda);
+    traverse(lambda);
 }
 int main() {
     LinkedList<int> linkedList;
@@ -121,13 +121,13 @@ int main() {
     auto lambda = [](Node<int> node) {
         std::cout <<"Lambda: "<< node.data << '\n';
     };
-    linkedList.transverse(lambda);
+    linkedList.traverse(lambda);
     std::vector<Node<int>> items;
 
     auto getData= [&items](Node<int> node) {
          items.push_back(node);
     };
-    linkedList.transverse(getData);
+    linkedList.traverse(getData);
 
     std::cout << "Content of vector items:\n";
     for (auto item : items) {
